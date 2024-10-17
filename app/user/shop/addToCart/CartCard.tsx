@@ -347,9 +347,9 @@ const CartCard: React.FC = () => {
           </CardBody>
         </Card>
         <Modal
+          placement="center"
           isOpen={isOpen}
           onOpenChange={onOpenChange}
-          className="w-full"
           closeButton
         >
           <ModalContent>
