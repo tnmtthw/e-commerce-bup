@@ -4,7 +4,7 @@ import clsx from "clsx";
 import { Providers } from "../providers";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/app/user/components/Navbar";
-import Footer from "@/components/user/Footer";
+import Footer from "@/app/user/components/Footer";
 
 export const metadata: Metadata = {
   title: "E-commerce",
