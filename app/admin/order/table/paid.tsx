@@ -138,12 +138,17 @@ const PaidTable: React.FC = () => {
             <TableCell>
               <div className="flex space-x-2">
                 <Button
+                  size="sm"
                   color="primary"
                   onClick={() => handleUpdateStatus(order.id)}
                 >
                   Shipped
                 </Button>
-                <Button color="danger">Cancel</Button>
+                <Button 
+                size="sm"
+                color="danger">
+                  Cancel
+                </Button>
               </div>
             </TableCell>
           </TableRow>

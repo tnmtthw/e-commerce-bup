@@ -153,13 +153,18 @@ const PendingTable: React.FC = () => {
             <TableCell>
               <div className="flex space-x-2">
                 <Button
+                  size="sm"
                   isLoading={loadingOrderId === order.id}
                   color="primary"
                   onClick={() => handleUpdateStatus(order.id)}
                 >
                   {loadingOrderId !== order.id && "Paid"}
                 </Button>
-                <Button color="danger">Cancel</Button>
+                <Button 
+                size="sm"
+                color="danger">
+                  Cancel 
+                </Button>
               </div>
             </TableCell>
           </TableRow>
