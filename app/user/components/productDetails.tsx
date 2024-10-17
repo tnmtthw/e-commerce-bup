@@ -15,7 +15,7 @@ import ReactStars from "react-stars";
 import { Divider } from "@nextui-org/divider";
 import { RiDiscountPercentFill } from "react-icons/ri";
 
-import { MinusSymbol, PlusSymbol, ShoppingCart } from "./icons";
+import { MinusSymbol, PlusSymbol, ShoppingCart } from "@/components/user/icons";
 
 interface Product {
   id: number;
@@ -81,7 +81,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
     }
 
     try {
-      const response = await fetch("http://127.0.0.1:8000/api/cart/add", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cart/add`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -127,7 +127,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({
   useEffect(() => {
     const fetchReviews = async () => {
       const response = await fetch(
-        `http://127.0.0.1:8000/api/product-reviews/${product.id}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/product-reviews/${product.id}`,
       );
       const data = await response.json();
       setReviews(data);

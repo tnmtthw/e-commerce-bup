@@ -29,7 +29,7 @@ const ReceivedReviewProduct = ({ productId, userId }: ReviewProps) => {
     const fetchReviewStatus = async () => {
       try {
         const response = await fetch(
-          "http://localhost:8000/api/reviews/check",
+          `${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews/check`,
           {
             method: "POST",
             headers: {
@@ -65,7 +65,7 @@ const ReceivedReviewProduct = ({ productId, userId }: ReviewProps) => {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("http://localhost:8000/api/reviews", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/reviews`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

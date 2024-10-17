@@ -5,8 +5,8 @@ import { Card, CardBody } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
 import useSWR from "swr";
 import ProductListLoading from "./productListLoading";
-import ReviewRatingIcon from "@/components/user/reviewRatingIcon";
-import ProductDetails from "@/components/user/productDetails";
+import ReviewRatingIcon from "@/app/user/components/reviewRatingIcon";
+import ProductDetails from "@/app/user/components/productDetails";
 import { useDisclosure } from "@nextui-org/modal";
 import { Chip } from "@nextui-org/chip";
 import { RiDiscountPercentFill } from "react-icons/ri";
@@ -39,7 +39,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const ProductList: React.FC<ProductListProps> = ({ categoryName }) => {
   const { data: products = [], error } = useSWR<Product[]>(
-    `http://127.0.0.1:8000/api/product-by/${categoryName}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/product-by/${categoryName}`,
     fetcher,
   );
 
@@ -52,7 +52,7 @@ const ProductList: React.FC<ProductListProps> = ({ categoryName }) => {
     setSelectedProduct(product);
     onOpen();
     try {
-      await fetch(`http://localhost:8000/api/products/${product.id}/click`, {
+      await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/products/${product.id}/click`, {
         method: "POST",
       });
     } catch (error) {

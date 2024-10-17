@@ -23,7 +23,7 @@ const AddMinus: React.FC<AddMinusProps> = ({ item, userId, onQuantityUpdate }) =
     if (newQuantity < 1 || newQuantity > item.product.quantity) return;
     setQuantity(newQuantity);
     const response = await fetch(
-      `http://localhost:8000/api/cart/item/quantity/${item.id}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/cart/item/quantity/${item.id}`,
       {
         method: "PATCH",
         headers: {

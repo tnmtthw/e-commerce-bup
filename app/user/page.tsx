@@ -2,9 +2,9 @@
 import { Card, CardBody } from "@nextui-org/card";
 
 import React, { useState } from "react";
-import CategoryButton from "@/components/user/categoryButton";
-import ProductList from "@/components/user/productList";
-import HomeBanner from "@/components/user/homeBanner";
+import CategoryButton from "@/app/user/components/CategoryButton";
+import ProductList from "@/app/user/components/ProductList";
+import HomeBanner from "@/app/user/components/HomeBanner";
 export default function Home() {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   return (

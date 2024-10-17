@@ -6,7 +6,7 @@ import OrderTab from "./orderTab";
 import { useEffect, useState } from "react";
 import {
   fetchUserCartItemAndOrderCount
-} from "@/components/user/navbarData";
+} from "@/app/user/components/NavbarData";
 
 export default function ShopTab() {
 

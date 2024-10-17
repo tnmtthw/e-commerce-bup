@@ -87,7 +87,7 @@ const CartCard: React.FC = () => {
   }, [userId]);
 
   const { data: cartItems = [], error, mutate } = useSWR<CartItem[]>(
-    userId ? `http://localhost:8000/api/cart/items/${userId}` : null,
+    userId ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/cart/items/${userId}` : null,
     fetcher,
   );
 
@@ -154,7 +154,7 @@ const CartCard: React.FC = () => {
     formData.append("order_items", JSON.stringify(orderItems));
 
     try {
-      const response = await fetch(`http://localhost:8000/api/orders`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/orders`, {
         method: "POST",
         body: formData,
       });
@@ -203,7 +203,7 @@ const CartCard: React.FC = () => {
 
   const removeCartItem = async (id: number) => {
     try {
-      const response = await fetch(`http://localhost:8000/api/cart/item/remove/${id}`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/cart/item/remove/${id}`, {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',

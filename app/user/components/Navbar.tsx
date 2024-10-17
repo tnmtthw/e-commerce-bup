@@ -29,10 +29,10 @@ import {
   ShoppingCart,
   ShoppingCart1,
 } from "@/components/user/icons";
-import { fetchUserCartItemAndOrderCount } from "./navbarData";
+import { fetchUserCartItemAndOrderCount } from "./NavbarData";
 import { Badge } from "@nextui-org/badge";
-import SigninModal from "@/components/user/signinModal";
-import SignupModal from "@/components/user/signupModal";
+import SigninModal from "@/app/user/components/SigninModal";
+import SignupModal from "@/app/user/components/SignupModal";
 
 export const Navbar = () => {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();

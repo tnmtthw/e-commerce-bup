@@ -1,7 +1,7 @@
 export const fetchUserCartItemAndOrderCount = async () => {
   const userId = localStorage.getItem("userId");
   const res = await fetch(
-    `http://localhost:8000/api/getUserCartAndOrderCounts/${userId}`,
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/getUserCartAndOrderCounts/${userId}`,
   );
   if (!res.ok) {
     throw new Error("Failed to fetch data");

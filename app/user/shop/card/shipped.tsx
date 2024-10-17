@@ -42,7 +42,7 @@ export default function ShippedCard() {
     error,
     mutate,
   } = useSWR<Order[]>(
-    userId ? `http://localhost:8000/api/user-orders/${userId}` : null,
+    userId ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/user-orders/${userId}` : null,
     fetcher,
   );
 
@@ -55,7 +55,7 @@ export default function ShippedCard() {
     setLoadingOrderId(orderId);
     try {
       const response = await fetch(
-        `http://localhost:8000/api/order-received/${orderId}`,
+        `${process.env.NEXT_PUBLIC_API_BASE_URL}/order-received/${orderId}`,
         {
           method: "PUT",
           headers: {

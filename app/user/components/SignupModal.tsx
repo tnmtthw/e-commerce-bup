@@ -34,7 +34,7 @@ const SignupModal: React.FC<SignupModalProps> = ({ isOpen, onOpenChange }) => {
     
     const formData = new FormData(event.currentTarget);
 
-    const response = await fetch("http://127.0.0.1:8000/api/users", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users`, {
       method: "POST",
       body: formData,
     });

@@ -44,7 +44,7 @@ const SigninModal: React.FC<SigninModalProps> = ({
       return; // Stop submission if email is invalid
     }
 
-    const response = await fetch("http://localhost:8000/api/users/login", {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/users/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password }),

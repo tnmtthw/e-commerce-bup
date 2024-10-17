@@ -35,7 +35,7 @@ const fetcher = (url: string) => fetch(url).then((res) => res.json());
 const handleUpdateStatus = async (orderId: number, mutate: any) => {
   try {
     const response = await fetch(
-      `http://localhost:8000/api/orders/${orderId}`,
+      `${process.env.NEXT_PUBLIC_API_BASE_URL}/orders/${orderId}`,
       {
         method: "PUT",
         headers: {
@@ -69,7 +69,7 @@ export default function OrderCard() {
     error,
     mutate,
   } = useSWR<Order[]>(
-    userId ? `http://localhost:8000/api/user-orders/${userId}` : null,
+    userId ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/user-orders/${userId}` : null,
     fetcher,
   );
 
