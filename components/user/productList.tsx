@@ -31,7 +31,6 @@ interface Review {
 
 interface ProductListProps {
   categoryName: string;
-  product: Product;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
 }
@@ -178,11 +177,10 @@ const ProductList: React.FC<ProductListProps> = ({ categoryName }) => {
           finalPrice={calculateFinalPrice(
             selectedProduct.price,
             selectedProduct.discount_type,
-            selectedProduct.discount_value,
+            selectedProduct.discount_value
           )}
           isOpen={isOpen}
-          onOpenChange={onOpenChange}
-        />
+          onOpenChange={onOpenChange} categoryName={""}        />
       )}
     </div>
   );

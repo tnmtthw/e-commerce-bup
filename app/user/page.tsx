@@ -22,7 +22,9 @@ export default function Home() {
       </Card>
       <div className="mb-5">
         <div>
-          <ProductList categoryName={selectedCategory} />
+          <ProductList categoryName={selectedCategory} isOpen={false} onOpenChange={function (isOpen: boolean): void {
+            throw new Error("Function not implemented.");
+          } } />
         </div>
       </div>
     </div>

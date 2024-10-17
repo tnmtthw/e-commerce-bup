@@ -39,7 +39,7 @@ export default function ShopTab() {
           title={
             <div className="relative">
               Cart
-              <Badge
+              {/* <Badge
                 showOutline={false}
                 size="sm"
                 content={cartItemCount}
@@ -47,7 +47,7 @@ export default function ShopTab() {
                 color="danger"
                 placement="top-right"
                 className="absolute -top-5 -right-3"
-              />
+              /> */}
             </div>
           }
         >
@@ -58,7 +58,7 @@ export default function ShopTab() {
           title={
             <div className="relative">
               Order
-              <Badge
+              {/* <Badge
                 showOutline={false}
                 size="sm"
                 content={orderCount}
@@ -66,7 +66,7 @@ export default function ShopTab() {
                 color="danger"
                 placement="top-right"
                 className="absolute -top-5 -right-1"
-              />
+              /> */}
             </div>
           }
         >

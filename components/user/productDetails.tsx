@@ -36,6 +36,7 @@ interface Review {
 }
 
 interface ProductDetailsProps {
+  categoryName: string;
   product: Product;
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;

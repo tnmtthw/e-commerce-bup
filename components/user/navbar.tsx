@@ -29,9 +29,7 @@ import {
   ShoppingCart,
   ShoppingCart1,
 } from "@/components/user/icons";
-import { 
-  fetchUserCartItemAndOrderCount
-} from "./navbarData";
+import { fetchUserCartItemAndOrderCount } from "./navbarData";
 import { Badge } from "@nextui-org/badge";
 import SigninModal from "@/components/user/signinModal";
 import SignupModal from "@/components/user/signupModal";
@@ -41,28 +39,35 @@ export const Navbar = () => {
   const [isSignupOpen, setSignupOpen] = useState(false);
 
   const [cartItemAndOrderCount, setCartItemAndOrderCount] = useState<number | null>(null);
+  const [userFirstName, setUserFirstName] = useState<string | null>(null);
+  const [userLastName, setUserLastName] = useState<string | null>(null);
 
   useEffect(() => {
+    if (typeof window !== "undefined") {
+      setUserFirstName(localStorage.getItem("firstName"));
+      setUserLastName(localStorage.getItem("lastName"));
+    }
+
     const fetchData = async () => {
       try {
         const data = await fetchUserCartItemAndOrderCount();
         setCartItemAndOrderCount(data.cartItemAndOrderCount);
-
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
 
     fetchData();
-
     const intervalId = setInterval(fetchData, 5000);
 
     return () => clearInterval(intervalId);
   }, []);
 
   const clearLocalStorage = () => {
-    localStorage.clear();
-    window.location.reload();
+    if (typeof window !== "undefined") {
+      localStorage.clear();
+      window.location.reload();
+    }
   };
 
   const handleSignUpClick = () => {
@@ -143,7 +148,7 @@ export const Navbar = () => {
           <ThemeSwitch />
         </NavbarItem>
         <NavbarItem className="hidden md:flex">
-          {!localStorage.getItem("userId") ? (
+          {!userFirstName ? (
             <Button
               onPress={onOpen}
               className="text-sm font-normal text-default-600 bg-default-100"
@@ -155,8 +160,7 @@ export const Navbar = () => {
           ) : (
             <div className="flex items-center">
               <span className="mr-2">
-                {localStorage.getItem("firstName")}{" "}
-                {localStorage.getItem("lastName")}
+                {userFirstName} {userLastName}
               </span>
               <Badge
                 content={cartItemAndOrderCount}
@@ -199,7 +203,7 @@ export const Navbar = () => {
       </NavbarContent>
       <NavbarMenu>
         <NavbarMenuItem>
-          {!localStorage.getItem("userId") ? (
+          {!userFirstName ? (
             <Button
               onPress={onOpen}
               className="text-lg font-medium text-default-600 flex items-center space-x-2"
@@ -211,8 +215,7 @@ export const Navbar = () => {
           ) : (
             <div className="flex items-center space-x-4">
               <span className="text-lg font-medium text-default-600">
-                {localStorage.getItem("firstName")}{" "}
-                {localStorage.getItem("lastName")}
+                {userFirstName} {userLastName}
               </span>
               <Button
                 onPress={clearLocalStorage}
