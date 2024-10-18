@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Card, CardBody } from "@nextui-org/card";
 import { Image } from "@nextui-org/image";
+import { Spinner } from "@nextui-org/spinner";
 import useSWR from "swr";
 import ProductListLoading from "./productListLoading";
 import ReviewRatingIcon from "@/app/user/components/reviewRatingIcon";
@@ -60,7 +61,7 @@ const ProductList: React.FC<ProductListProps> = ({ categoryName }) => {
     }
   };
 
-  if (error) return <div>Error loading products</div>;
+  if (error) return <ProductListLoading />;
   if (!products.length) return <ProductListLoading />;
 
   const getAverageRating = (reviews?: Review[]) => {
@@ -88,7 +89,7 @@ const ProductList: React.FC<ProductListProps> = ({ categoryName }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-6 mb-20">
         {products.map((product) => {
           const finalPrice = calculateFinalPrice(
             product.price,
@@ -180,7 +181,7 @@ const ProductList: React.FC<ProductListProps> = ({ categoryName }) => {
             selectedProduct.discount_value
           )}
           isOpen={isOpen}
-          onOpenChange={onOpenChange} categoryName={""}        />
+          onOpenChange={onOpenChange} categoryName={""} />
       )}
     </div>
   );

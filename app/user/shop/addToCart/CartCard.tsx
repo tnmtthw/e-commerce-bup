@@ -76,7 +76,7 @@ const CartCard: React.FC = () => {
       Swal.fire({
         toast: true,
         position: "bottom-start",
-        text: "User not logged in",
+        text: "Please sign in",
         showConfirmButton: false,
         timer: 2000,
         background: "#dc3545",
@@ -347,9 +347,10 @@ const CartCard: React.FC = () => {
           </CardBody>
         </Card>
         <Modal
-          placement="center"
+           placement="center"
           isOpen={isOpen}
           onOpenChange={onOpenChange}
+          className="w-full"
           closeButton
         >
           <ModalContent>

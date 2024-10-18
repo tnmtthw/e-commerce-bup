@@ -76,7 +76,7 @@ export const Navbar = () => {
   };
 
   return (
-    <NextUINavbar maxWidth="xl" position="sticky">
+    <NextUINavbar  maxWidth="xl" position="sticky" className="hidden md:flex">
       <NavbarContent className="basis-1/5 sm:basis-full" justify="start">
         <NavbarBrand as="li" className="gap-3 max-w-fit">
           <NextLink
@@ -234,7 +234,9 @@ export const Navbar = () => {
         onOpenChange={onOpenChange}
         onSignUpClick={handleSignUpClick}
       />
-      <SignupModal isOpen={isSignupOpen} onOpenChange={setSignupOpen} />
+      <SignupModal 
+      isOpen={isSignupOpen} 
+      onOpenChange={setSignupOpen} />
     </NextUINavbar>
   );
 };
