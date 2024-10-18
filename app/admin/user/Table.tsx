@@ -33,6 +33,10 @@ interface User {
   phone: string;
   address: string;
 }
+import { 
+  toast 
+} from 'react-toastify';
+import CustomToastContainer from "../components/CustomToastContainer";
 
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
@@ -86,7 +90,7 @@ const UserTable: React.FC = () => {
       }
 
       console.log("User updated successfully!");
-
+      toast.success("Updated successfully!");
       // Refresh the product list after updating
       await mutate();
 
@@ -117,6 +121,7 @@ const UserTable: React.FC = () => {
       }
 
       console.log("User deleted successfully!");
+      toast.success("Deleted successfully!");
 
       // Refresh the product list after deletion
       await mutate();
@@ -148,6 +153,7 @@ const UserTable: React.FC = () => {
 
   return (
     <div>
+      <CustomToastContainer/>
       <Table>
         <TableHeader>
           <TableColumn>FULLNAME</TableColumn>

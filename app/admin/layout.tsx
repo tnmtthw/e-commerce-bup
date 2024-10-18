@@ -6,6 +6,7 @@ import { fontSans } from "@/config/fonts";
 import Sidebar from "@/components/admin/sidebar";
 import BreadCrumbs from "@/components/admin/breadcrumbs";
 import OrderNotification from "./toast/OrderNotification";
+import { ToastContainer } from "react-toastify";
 
 export const metadata: Metadata = {
   title: "E-commerce-Admin",
@@ -25,6 +26,7 @@ export default function AdminLayout({
         <Sidebar />
         <main className="flex-grow ml-64 mt-14 overflow-x-auto p-5">
           <BreadCrumbs />
+          <ToastContainer />
           {children}
           <OrderNotification />
         </main>

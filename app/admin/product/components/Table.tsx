@@ -26,7 +26,11 @@ import "photoswipe/dist/photoswipe.css";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import { EditIcon, DeleteIcon } from "@/components/admin/icon";
 import { PlusSymbol } from '@/components/admin/icon';
-import AddProductModal from "./AddProductModal";
+import AddModal from "./AddProductModal";
+import CustomToastContainer from "@/app/admin/components/CustomToastContainer";
+import {
+  toast
+} from 'react-toastify';
 
 interface Product {
   id: number;
@@ -141,6 +145,7 @@ const ProductTable: React.FC = () => {
       }
 
       console.log("Product updated successfully!");
+      toast.success("Updated successfully!");
 
       await mutate();
 
@@ -169,6 +174,7 @@ const ProductTable: React.FC = () => {
       }
 
       console.log("Product deleted successfully!");
+      toast.success("Deleted successfully!");
 
       await mutate();
 
@@ -203,19 +209,20 @@ const ProductTable: React.FC = () => {
   return (
     <div>
       <div className="mb-4">
-      <Button
-        onPress={onOpen}
-        color="primary"
-        endContent={<PlusSymbol />}
-      >
-        Add new
-      </Button>
-      <AddProductModal
-        isOpen={isOpen}
-        onOpenChange={onOpenChange}
-        onProductAdded={mutate}
-      />
+        <Button
+          onPress={onOpen}
+          color="primary"
+          endContent={<PlusSymbol />}
+        >
+          Add new
+        </Button>
+        <AddModal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          onProductAdded={mutate}
+        />
       </div>
+      <CustomToastContainer />
       <Table
         selectionMode="single"
         bottomContent={

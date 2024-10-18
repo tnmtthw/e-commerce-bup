@@ -23,7 +23,12 @@ import {
   TableRow,
   TableCell,
 } from "@nextui-org/table";
-import { EditIcon, DeleteIcon } from "@/components/admin/icon";
+import { EditIcon, DeleteIcon, PlusSymbol } from "@/components/admin/icon";
+import {
+  toast
+} from 'react-toastify';
+import CustomToastContainer from "../components/CustomToastContainer";
+import AddCategoryModal from "./AddCategoryModal";
 
 interface Category {
   id: number;
@@ -33,12 +38,9 @@ interface Category {
 const fetcher = (url: string) => fetch(url).then((res) => res.json());
 
 const CategoryTable: React.FC = () => {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure(); // For delete modal
-  const {
-    isOpen: isEditOpen,
-    onOpen: onEditOpen,
-    onOpenChange: onEditOpenChange,
-  } = useDisclosure(); // For update modal
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen: isDeleteOpen, onOpen: onDeleteOpen, onOpenChange: onDeleteOpenChange, } = useDisclosure();
+  const { isOpen: isEditOpen, onOpen: onEditOpen, onOpenChange: onEditOpenChange, } = useDisclosure();
   const {
     data: categories = [],
     error,
@@ -80,11 +82,10 @@ const CategoryTable: React.FC = () => {
       }
 
       console.log("Category updated successfully!");
+      toast.success("Updated successfully!");
 
-      // Refresh the category list after updating
       await mutate();
 
-      // Close the modal
       onEditOpenChange();
     } catch (error) {
       console.error("Error updating the category:", error);
@@ -112,11 +113,10 @@ const CategoryTable: React.FC = () => {
 
       console.log("Category deleted successfully!");
 
-      // Refresh the category list after deletion
       await mutate();
+      toast.success("Deleted successfully!");
 
-      // Close the modal
-      onOpenChange();
+      onDeleteOpenChange();
     } catch (error) {
       console.error("Error deleting the category:", error);
     } finally {
@@ -138,6 +138,21 @@ const CategoryTable: React.FC = () => {
 
   return (
     <div>
+      <div className="mb-4">
+        <Button
+          onPress={onOpen}
+          color="primary"
+          endContent={<PlusSymbol />}
+        >
+          Add new
+        </Button>
+        <AddCategoryModal
+          isOpen={isOpen}
+          onOpenChange={onOpenChange}
+          onCategoryAdded={mutate}
+        />
+      </div>
+      <CustomToastContainer />
       <Table>
         <TableHeader>
           <TableColumn>NAME</TableColumn>
@@ -148,23 +163,6 @@ const CategoryTable: React.FC = () => {
             <TableRow key={category.id}>
               <TableCell>{category.name}</TableCell>
               <TableCell>
-                {/* <div className="flex space-x-2">
-                  <Button
-                    color="primary"
-                    onClick={() => handleEditCategory(category)}
-                  >
-                    EDIT
-                  </Button>
-                  <Button
-                    color="danger"
-                    onClick={() => {
-                      setSelectedCategory(category);
-                      onOpen(); // Open delete modal
-                    }}
-                  >
-                    DEL
-                  </Button>
-                </div> */}
                 <div className="flex justify-center space-x-2">
                   <Tooltip content="Edit product">
                     <span
@@ -174,11 +172,11 @@ const CategoryTable: React.FC = () => {
                       <EditIcon />
                     </span>
                   </Tooltip>
-                  <Tooltip color="danger" content="Delete product">
+                  <Tooltip color="danger" content="Delete category">
                     <span
                       onClick={() => {
                         setSelectedCategory(category);
-                        onOpen();
+                        onDeleteOpen();
                       }}
                       className="text-lg text-danger cursor-pointer active:opacity-50"
                     >
@@ -193,11 +191,12 @@ const CategoryTable: React.FC = () => {
       </Table>
 
       {/* Delete Modal */}
-      <Modal isOpen={isOpen} onOpenChange={onOpenChange}>
+      <Modal isOpen={isDeleteOpen} onOpenChange={onDeleteOpenChange}>
         <ModalContent>
           <ModalHeader>{selectedCategory?.name}</ModalHeader>
           <ModalBody>Are you sure you want to delete this category?</ModalBody>
           <ModalFooter>
+            <Button onClick={onDeleteOpenChange}>Close</Button>
             <Button
               color="danger"
               onClick={handleDeleteCategory}
@@ -205,7 +204,6 @@ const CategoryTable: React.FC = () => {
             >
               Yes, Delete
             </Button>
-            <Button onClick={() => onOpenChange()}>Close</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
@@ -223,13 +221,14 @@ const CategoryTable: React.FC = () => {
             />
           </ModalBody>
           <ModalFooter>
-            <Button onClick={() => onEditOpenChange()}>Close</Button>
+            <Button onClick={onEditOpenChange}>Close</Button>
             <Button color="primary" onClick={handleUpdateCategory} isLoading={loading}>
-              Update
+              Save Changes
             </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
+
     </div>
   );
 };

@@ -238,7 +238,7 @@ const AddProductModal: React.FC<AddProductModalProps> = ({ isOpen, onOpenChange,
                                             </SelectItem>
                                         ))}
                                     </Select>
-                                    <div className="col-span-2 gap-x-2 flex items-end justify-end">
+                                    <div className="col-span-2 gap-x-2 flex items-end justify-end mb-4">
                                         <Button onPress={() => onOpenChange(false)}>Close</Button>
                                         <Button type="submit" color="primary">
                                             Save Product
